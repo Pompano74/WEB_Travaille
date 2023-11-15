@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        #game-container {
+            width: 600px;
+            height: 400px;
+            border: 1px solid black;
+            position: relative;
+        }
+
+        .target {
+            width: 30px;
+            height: 30px;
+            background-color: red;
+            position: absolute;
+            top: 150px;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <div class="target"></div>
+    </div>
+
+    <script>
+        const gameContainer = document.getElementById('game-container');
+        const target = document.querySelector('.target');
+
+        let score = 0;
+
+        target.addEventListener('click', () => {
+            score++;
+            updateScore();
+            moveTarget();
+        });
+
+        function updateScore() {
+            const scoreElement = document.createElement('p');
+            scoreElement.textContent = `Score: ${score}`;
+            document.body.appendChild(scoreElement);
+        }
+
+        function moveTarget() {
+            const maxX = gameContainer.clientWidth - target.clientWidth;
+            const maxY = gameContainer.clientHeight - target.clientHeight;
+            const randomX = Math.floor(Math.random() * maxX);
+            const randomY = Math.floor(Math.random() * maxY);
+
+            target.style.left = randomX + 'px';
+            target.style.top = randomY + 'px';
+        }
+
+        moveTarget();
+    </script>
+</body>
+</html>
